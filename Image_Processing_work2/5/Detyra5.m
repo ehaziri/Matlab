@@ -1,0 +1,13 @@
+I = imread('Aeroplanet.jpg');
+Igray = rgb2gray(I);%kthejme imazhin ne te hirte
+bw = im2bw(Igray);%kthejme imazhin ne binar
+c = edge(Igray);%gjejme tehet e imazhit te hirts
+%tehu = edge(bw);
+se = [1 1 1; 1 1 1; 1 1 1];%elementi strukturor
+p = imdilate(c,se);%bejme perhapjen e imazhit me tehe
+l = bwareaopen(p,100);%largojme elementet qe jane me te vogla se 100px
+h = imfill(l,'holes');%mbushim zbrazetirat qe jane krijuar
+s = strel('diamond',2);%elementi strukturor diamand me madhesi 2px
+a_bw = imclose(h,s);
+[labeled, number]= bwlabel(a_bw);%krijojme labelat per numerim te aeroplaneve ne imazh
+imshow(I),title(['Numri i aeroplaneve = ' , num2str(number)]);
